@@ -29,8 +29,9 @@ export const Container = styled.SafeAreaView`
 
 // Header
 export const HeaderView = styled.View`
-  padding-vertical: 10px;
-  margin-bottom: 10px;
+  padding-right: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -38,6 +39,7 @@ export const HeaderView = styled.View`
 
 export const HeaderTitle = styled.Text`
   font-size: 35px;
+  margin-left: 15px;
   font-weight: bold;
   color: ${colors.tertiary};
   letter-spacing: 2px;
@@ -46,6 +48,7 @@ export const HeaderTitle = styled.Text`
 export const HeaderButton = styled.TouchableOpacity`
   font-weight: bold;
   color: ${colors.tertiary};
+  margin-left: 20px;
 `
 
 // List
@@ -84,6 +87,7 @@ export const HiddenButton = styled.TouchableOpacity`
 export const TodoText = styled.Text`
   font-size: 16px;
   letter-spacing: 1px;
+  margin-left: 20px;
   color: ${colors.tertiary};
 `
 
@@ -112,7 +116,7 @@ export const ModalButton = styled.TouchableOpacity`
   align-items: center;
   align-self: center;
   position: absolute;
-  bottom: 15px;
+  bottom: 55px;
 `
 
 export const ModalContainer = styled.View`

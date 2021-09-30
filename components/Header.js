@@ -9,11 +9,14 @@ import {
   colors,
 } from '../styles/appStyles'
 
-const Header = () => {
+const Header = ({ setTodos }) => {
+  const handleDeleteAll = () => {
+    setTodos([])
+  }
   return (
     <HeaderView>
       <HeaderTitle>Todos</HeaderTitle>
-      <HeaderButton>
+      <HeaderButton onPress={() => handleDeleteAll()}>
         <Entypo name='trash' size={25} color={colors.tertiary} />
       </HeaderButton>
     </HeaderView>
