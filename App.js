@@ -8,6 +8,10 @@ import Home from './components/Home'
 //Styles
 import { Container } from './styles/appStyles'
 
+//async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import AppLoading from 'expo-app-loading'
+
 export default function App() {
   return (
     <Container>

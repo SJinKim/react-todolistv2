@@ -39,12 +39,13 @@ export const HeaderView = styled.View`
 
 export const HeaderTitle = styled.Text`
   font-size: 35px;
-  margin-left: 15px;
+  margin-left: 25px;
   font-weight: bold;
   color: ${colors.tertiary};
   letter-spacing: 2px;
   font-style: italic;
 `
+
 export const HeaderButton = styled.TouchableOpacity`
   font-weight: bold;
   color: ${colors.tertiary};
@@ -131,6 +132,16 @@ export const ModalView = styled.View`
   background-color: ${colors.secondary};
   border-radius: 20px;
   padding: 35px;
+  margin-bottom: 250px;
+`
+export const HeaderTitleModal = styled.Text`
+  font-size: 40px;
+  margin-left: 94px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: ${colors.tertiary};
+  letter-spacing: 2px;
+  font-style: italic;
 `
 
 export const StyledInput = styled.TextInput`

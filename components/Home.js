@@ -26,11 +26,50 @@ const Home = () => {
 
   const [todos, setTodos] = useState(initialTasks)
 
+  //modal visibility & input value
+  const [modalVisible, setModalVisible] = useState(false)
+  const [todoInputValue, setTodoInputValue] = useState()
+
+  //Edit trigger
+  const [todoToBeEdited, setTodoToBeEdited] = useState(null)
+
+  const handleAddTodo = (todo) => {
+    var copyInitialTask = [...todos, todo]
+    setTodos(copyInitialTask)
+    setModalVisible(false)
+  }
+
+  const handleTriggerEdit = (item) => {
+    setTodoToBeEdited(item)
+    setModalVisible(true)
+    setTodoInputValue(item.title)
+  }
+
+  const handleEditTodo = (editedTodo) => {
+    const newTodos = [...todos]
+    const todoIndex = todos.findIndex((todo) => todo.key === editedTodo.key)
+    newTodos.splice(todoIndex, editedTodo)
+    setTodos(newTodos)
+    setTodoToBeEdited(null)
+    setModalVisible(false)
+  }
+
   return (
     <>
       <Header setTodos={setTodos} />
       <ItemList todos={todos} setTodos={setTodos} />
-      <InputModal />
+      <InputModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        todoInputValue={todoInputValue}
+        setTodoInputValue={setTodoInputValue}
+        handleAddTodo={handleAddTodo}
+        todos={todos}
+        handleTriggerEdit={handleTriggerEdit}
+        todoToBeEdited={todoToBeEdited}
+        setTodoToBeEdited={setTodoToBeEdited}
+        handleEditTodo={handleEditTodo}
+      />
     </>
   )
 }

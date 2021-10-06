@@ -13,7 +13,7 @@ import {
   colors,
 } from '../styles/appStyles'
 
-const ItemList = ({ todos, setTodos }) => {
+const ItemList = ({ todos, setTodos, handleTriggerEdit }) => {
   const [swipedRow, setSwipedRow] = useState(null)
 
   const handleDelete = (rowKey, rowMap) => {
@@ -34,7 +34,12 @@ const ItemList = ({ todos, setTodos }) => {
               data.item.key == swipedRow ? SwipedTodoText : TodoText
 
             return (
-              <ListView underlayColor={colors.primary} onPress={() => {}}>
+              <ListView
+                underlayColor={colors.primary}
+                onPress={() => {
+                  handleTriggerEdit(data.item)
+                }}
+              >
                 <>
                   <RowText>{data.item.title}</RowText>
                   <TodoDate>{data.item.date}</TodoDate>
