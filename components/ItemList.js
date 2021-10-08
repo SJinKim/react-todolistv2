@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { Entypo } from '@expo/vector-icons'
 
+//async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 //styles
 import {
   ListView,
@@ -17,10 +20,15 @@ const ItemList = ({ todos, setTodos, handleTriggerEdit }) => {
   const [swipedRow, setSwipedRow] = useState(null)
 
   const handleDelete = (rowKey, rowMap) => {
-    const ItemCopy = [...todos]
+    const itemCopy = [...todos]
     const todoIndex = todos.findIndex((todo) => todo.key === rowKey)
-    ItemCopy.splice(todoIndex, 1)
-    setTodos(ItemCopy)
+    itemCopy.splice(todoIndex, 1)
+
+    AsyncStorage.setItem('storedTodos', JSON.stringify(itemCopy))
+      .then(() => {
+        setTodos(itemCopy)
+      })
+      .catch((error) => console.log(error))
   }
 
   return (
@@ -36,9 +44,7 @@ const ItemList = ({ todos, setTodos, handleTriggerEdit }) => {
             return (
               <ListView
                 underlayColor={colors.primary}
-                onPress={() => {
-                  handleTriggerEdit(data.item)
-                }}
+                onPress={() => handleTriggerEdit(data.item)}
               >
                 <>
                   <RowText>{data.item.title}</RowText>

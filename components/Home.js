@@ -5,26 +5,19 @@ import Header from './Header'
 import ItemList from './ItemList'
 import InputModal from './InputModal'
 
-const Home = () => {
-  const initialTasks = [
-    {
-      title: 'Get some iceCream',
-      date: '2021-01-09 18:00:00 GMT',
-      key: '1',
-    },
-    {
-      title: 'Get some iceCream2',
-      date: '2021-01-09 18:00:00 GMT',
-      key: '2',
-    },
-    {
-      title: 'Get some iceCream3',
-      date: '2021-01-09 18:00:00 GMT',
-      key: '3',
-    },
-  ]
+//async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-  const [todos, setTodos] = useState(initialTasks)
+const Home = ({ todos, setTodos }) => {
+  //clear all todos
+  const handleClearTodos = () => {
+    setTodos([])
+    AsyncStorage.setItem('storedTodos', JSON.stringify([]))
+      .then(() => {
+        setTodos([])
+      })
+      .catch((error) => console.log(error))
+  }
 
   //modal visibility & input value
   const [modalVisible, setModalVisible] = useState(false)
@@ -35,8 +28,13 @@ const Home = () => {
 
   const handleAddTodo = (todo) => {
     var copyInitialTask = [...todos, todo]
-    setTodos(copyInitialTask)
-    setModalVisible(false)
+
+    AsyncStorage.setItem('storedTodos', JSON.stringify(copyInitialTask))
+      .then(() => {
+        setTodos(copyInitialTask)
+        setModalVisible(false)
+      })
+      .catch((error) => console.log(error))
   }
 
   const handleTriggerEdit = (item) => {
@@ -48,16 +46,25 @@ const Home = () => {
   const handleEditTodo = (editedTodo) => {
     const newTodos = [...todos]
     const todoIndex = todos.findIndex((todo) => todo.key === editedTodo.key)
-    newTodos.splice(todoIndex, editedTodo)
-    setTodos(newTodos)
-    setTodoToBeEdited(null)
-    setModalVisible(false)
+    newTodos.splice(todoIndex, 1, editedTodo)
+
+    AsyncStorage.setItem('storedTodos', JSON.stringify(newTodos))
+      .then(() => {
+        setTodos(newTodos)
+        setTodoToBeEdited(null)
+        setModalVisible(false)
+      })
+      .catch((error) => console.log(error))
   }
 
   return (
     <>
       <Header setTodos={setTodos} />
-      <ItemList todos={todos} setTodos={setTodos} />
+      <ItemList
+        todos={todos}
+        setTodos={setTodos}
+        handleTriggerEdit={handleTriggerEdit}
+      />
       <InputModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
