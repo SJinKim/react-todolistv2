@@ -2,4 +2,4 @@
 
 using react: 
 - swipe effect
-- #Asyncstorage
+- Asyncstorage
