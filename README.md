@@ -1,4 +1,4 @@
-# React-Native Todo List Project
+# Project: Todo List by using React-Native
 
 using expo with: 
 - swipe effect
