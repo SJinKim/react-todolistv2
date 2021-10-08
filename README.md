@@ -1,5 +1,5 @@
-# react-todolistv2
+# React-Native Todo List Project
 
-using react: 
+using expo with: 
 - swipe effect
 - Asyncstorage
